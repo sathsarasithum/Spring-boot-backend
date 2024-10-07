@@ -1,0 +1,44 @@
+Why need DTO??
+-> Separation of Concerns:
+
+The Product entities represent the internal data model,
+while ProductDTO is a simplified and more specific representation of the
+data intended for external use (e.g., sending over the API).
+DTOs are designed to only expose the necessary data to clients.
+
+->Security:::
+Some fields in the Product entity might be sensitive (like internal IDs, timestamps,
+or database-related fields) that shouldn't be exposed to clients.
+Using a DTO ensures that only the necessary and safe fields are sent to the client.
+
+->Custom Formatting:
+The ProductDTO may format or organize data differently,
+e.g., combining fields, renaming fields, or converting data types (such as formatting dates).
+
+->Efficiency:
+The ProductDTO might contain only the essential data required by the API consumers,
+reducing the amount of data transferred over the network.
+
+Why Convert to DTOs?
+
+Data Encapsulation: DTOs encapsulate only the necessary data for API consumers, preventing exposure of internal data.
+Custom Data Representation: DTOs allow for custom representation of data to match the API’s needs without changing the underlying entity.
+Loose Coupling: The conversion process decouples the internal database models (Product) from the API-facing models (ProductDTO).
+                This allows changes in internal database structure without affecting the API contract.
+Improved Performance: By sending only the required fields in the DTO, unnecessary data transfer over the network is reduced.
+
+class Product {
+    private Long id;
+    private String name;
+    private String description;
+    private double price;
+    private LocalDateTime createdAt;
+    private boolean isDeleted;
+    // Additional fields for internal use
+}
+
+class ProductDTO {
+    private String name;
+    private String description;
+    private double price;
+}

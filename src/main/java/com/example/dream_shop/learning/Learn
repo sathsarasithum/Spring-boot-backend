@@ -1,0 +1,26 @@
+Hibernate:
+    create table orders (
+        id bigint not null,
+        order_date date,
+        order_status enum ('CANCELLED','DELIVERED','PENDING','PROCESSING','SHIPPED'),
+        total_amount decimal(38,2),
+        user_id bigint,
+        primary key (id)
+    ) engine=InnoDB
+Hibernate:
+    create table orders_seq (
+        next_val bigint
+    ) engine=InnoDB
+Hibernate:
+    insert into orders_seq values ( 1 )
+Hibernate:
+    alter table order_item
+       add constraint FKt4dc2r9nbvbujrljv3e23iibt
+       foreign key (order_id)
+       references orders (id)
+Hibernate:
+    alter table orders
+       add constraint FKel9kyl84ego2otj2accfd8mr7
+       foreign key (user_id)
+       references user (id)
+

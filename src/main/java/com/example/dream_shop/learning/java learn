@@ -1,0 +1,37 @@
+1.JoinColumn annotation??
+
+
+ *In One-To-One relationship*
+
+@Entity
+public class Office {
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "addressId")
+    private Address address;
+}
+
+@OneToOne සිතියම්ගත කිරීමක් සමඟ ඒකාබද්ධ වූ @JoinColumn විවරණයෙන් පෙන්නුම් කරන්නේ
+හිමිකරු ආයතනයේ දී ඇති තීරුවක් යොමු ආයතනයේ මූලික යතුරක් වෙත යොමු වන බවයි..
+
+2. @OneToMany Mapping Example
+
+@Entity
+public class Employee {
+
+    @Id
+    private Long id;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private List<Email> emails;
+}
+
+@Entity
+public class Email {
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+}
+@OneToMany සිතියම්ගත කිරීමක් භාවිතා කරන විට,
+දී ඇති තීරුව වෙනත් ආයතනයකට අයත් බව දැක්වීමට අපට mappedBy පරාමිතිය භාවිතා කළ හැක:
+
